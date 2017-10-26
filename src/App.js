@@ -2,23 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import getChatLog from './service';
+import { getChatLog, getMemberList } from './service';
+import { Messages } from './components/Messages'
 
 import './App.css';
 
 class App extends Component {
   render() {
-    return (
-      <h1>Hello!</h1>
-    );
+    return (<Messages members={this.props.members} messages={this.props.messages} />)
   }
 }
 
+App.defaultProps = {  
+    members: {},  
+    messages: {} 
+} 
+
 const mapStateToProps = state => {
-  return {};
+  return {
+    messages: state.messages,
+    members: state.members
+  }
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getChatLog }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({getChatLog, getMemberList}, dispatch);
 
 export default connect(
   mapStateToProps,

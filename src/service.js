@@ -1,8 +1,15 @@
-import { getMessages } from './data';
+import { getMessages, getMembers } from './data';
 
-export default function getChatLog() {
+export function getChatLog() {
   return {
     type: 'MESSAGES_LOADING',
-    payload: getMessages()
-  };
+    payload: getMessages().then(messages => messages)
+  }
+}
+
+export function getMemberList() {
+  return {
+    type: 'MEMBERS_LOADING',
+    payload: getMembers().then(members => members)
+  }
 }
